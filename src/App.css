@@ -13,14 +13,6 @@ body {
   transition: 0.5s ease;
 }
 
-.cursor1 {
-  position: absolute;
-  font-size: 40px;
-  color: yellow;
-  transform: translate(-50%, -50%);
-  transition: 0.5s ease;
-}
-
 h1 {
   font-size: 30px;
   color: white;
