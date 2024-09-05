@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FaHeart } from "react-icons/fa";
 
 const Characters = () => {
   const [data, setData] = useState([]);
@@ -51,6 +52,7 @@ const Characters = () => {
                   />
                 </div>
                 <div className="char-card-name">
+                  <FaHeart />
                   <p>{item.name}</p>
                 </div>
                 <div className="char-card-detail">{item.description}</div>
