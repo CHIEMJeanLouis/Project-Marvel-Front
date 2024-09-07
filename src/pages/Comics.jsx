@@ -27,6 +27,9 @@ const Comics = () => {
         setCount(response.data.count);
         setResults(response.data.results.length);
         setIsLoading(false);
+        if (results < 100) {
+          setSkip(0);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -39,20 +42,23 @@ const Comics = () => {
     <div className="loader">
       <img src={Loader} alt="loader" />
     </div>
-  ) : (
+  ) : results ? (
     <div className="character-container">
       <div className="character-top">
         <h1>Comics</h1>
-        <Search setSearch={setSearch} />
+        <Search setSearch={setSearch} setPage={setPage} setSkip={setSkip} />
       </div>
-      <Pagination
-        page={page}
-        setPage={setPage}
-        skip={skip}
-        setSkip={setSkip}
-        count={count}
-        results={results}
-      />
+      {results === 100 && (
+        <Pagination
+          page={page}
+          setPage={setPage}
+          skip={skip}
+          setSkip={setSkip}
+          count={count}
+          results={results}
+        />
+      )}
+
       <div className="character-content">
         {data.results.map((item) => {
           console.log(item);
@@ -74,6 +80,11 @@ const Comics = () => {
           );
         })}
       </div>
+    </div>
+  ) : (
+    <div className="noresult">
+      <Search search={search} setSearch={setSearch} />
+      <h1> No results found</h1>
     </div>
   );
 };

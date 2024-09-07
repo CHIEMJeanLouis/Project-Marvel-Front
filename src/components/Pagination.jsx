@@ -15,7 +15,7 @@ const Pagination = ({ results, page, setPage, skip, setSkip, count }) => {
         </p>
       </div>
     );
-  } else if (page === 1 && results < 100) {
+  } else if (results < 100) {
     return;
   } else if (page === Number(lastPage)) {
     return (

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { baseUrl } from "../utils/endPoints";
 import { baseCommandUrl } from "../utils/endPoints";
+import Cookies from "js-cookie";
 
 import Aïe from "../assets/images/Aïe.webp";
 
@@ -20,6 +21,7 @@ const Characters = () => {
   const [skip, setSkip] = useState(0);
   const [count, setCount] = useState();
   const [results, setResults] = useState();
+  const [fav, setFav] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -39,16 +41,26 @@ const Characters = () => {
     fetchData();
   }, [search, page]);
 
+  // useEffect(() => {
+  //   setPage(1);
+  // }, [search]);
+
   return isLoading ? (
     <div className="loader">
-      <img src={Aïe} alt="" />
+      <img src={Aïe} alt="Loader douloureux xD" />
     </div>
-  ) : (
+  ) : results ? (
     <div className="character-container">
       <div className="character-top">
         <h1>Personnages</h1>
-        <Search search={search} setSearch={setSearch} />
+        <Search
+          search={search}
+          setSearch={setSearch}
+          setPage={setPage}
+          setSkip={setSkip}
+        />
       </div>
+
       <Pagination
         page={page}
         setPage={setPage}
@@ -57,25 +69,44 @@ const Characters = () => {
         count={count}
         results={results}
       />
+
       <div className="character-content">
         {data.results.map((item) => {
           //console.log(item);
+
+          // const favoris = item._id;
+
+          // Cookies.set(fav, favoris, { expires: 7 });
+
+          const handleFavorites = (item) => {
+            console.log(item);
+            // const addFavorite =
+          };
+
           return (
-            <Link to={`/character/${item._id}`} key={item._id}>
-              <div className="char-card">
-                <div className="char-card-pic">
-                  <img
-                    src={item.thumbnail.path + "/portrait_medium.jpg"}
-                    alt="pic of character"
-                  />
-                </div>
-                <div className="char-card-name">
-                  <FaHeart />
-                  <p>{item.name}</p>
-                </div>
-                <div className="char-card-detail">{item.description}</div>
+            <div className="favorite" key={item._id}>
+              <div
+                onClick={() => {
+                  handleFavorites();
+                }}
+              >
+                <FaHeart />
               </div>
-            </Link>
+              <Link to={`/character/${item._id}`}>
+                <div className="char-card">
+                  <div className="char-card-pic">
+                    <img
+                      src={item.thumbnail.path + "/portrait_medium.jpg"}
+                      alt="pic of character"
+                    />
+                  </div>
+                  <div className="char-card-name">
+                    <p>{item.name}</p>
+                  </div>
+                  <div className="char-card-detail">{item.description}</div>
+                </div>
+              </Link>
+            </div>
           );
         })}
       </div>
@@ -87,6 +118,11 @@ const Characters = () => {
         count={count}
         results={results}
       />
+    </div>
+  ) : (
+    <div className="noresult">
+      <Search search={search} setSearch={setSearch} />
+      <h1> No results found</h1>
     </div>
   );
 };

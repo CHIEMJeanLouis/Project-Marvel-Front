@@ -1,7 +1,5 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
 
 //icons
 import { FaSpider } from "react-icons/fa";
@@ -16,6 +14,7 @@ import Favoris from "./pages/Favoris";
 import Character from "./pages/Character";
 import Welcome from "./pages/Welcome";
 import Comic from "./pages/Comic";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -30,6 +29,7 @@ function App() {
           <Route path="/comic/:id" element={<Comic />} />
           <Route path="/favoris" element={<Favoris />} />
         </Routes>
+        <Footer />
       </Router>
     </>
   );
