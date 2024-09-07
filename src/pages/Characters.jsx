@@ -2,43 +2,61 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
+import { baseUrl } from "../utils/endPoints";
+import { baseCommandUrl } from "../utils/endPoints";
+
+import Aïe from "../assets/images/Aïe.webp";
+
+//import de components
+
+import Search from "../components/Search";
+import Pagination from "../components/Pagination";
 
 const Characters = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [skip, setSkip] = useState(0);
+  const [count, setCount] = useState();
+  const [results, setResults] = useState();
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/characters?name=${search}&skip=${skip}`
+      );
+      setData(response.data);
+      setCount(response.data.count);
+      setResults(response.data.results.length);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://site--project-marvel--dcy6mcwbsfkq.code.run/characters`
-        );
-        setData(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchData();
-  }, []);
+  }, [search, page]);
 
   return isLoading ? (
-    <div>is Loading ...</div>
+    <div className="loader">
+      <img src={Aïe} alt="" />
+    </div>
   ) : (
     <div className="character-container">
       <div className="character-top">
         <h1>Personnages</h1>
-        <input
-          type="text"
-          // value={search}
-          placeholder="Recherche"
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
+        <Search search={search} setSearch={setSearch} />
       </div>
+      <Pagination
+        page={page}
+        setPage={setPage}
+        skip={skip}
+        setSkip={setSkip}
+        count={count}
+        results={results}
+      />
       <div className="character-content">
         {data.results.map((item) => {
           //console.log(item);
@@ -61,10 +79,14 @@ const Characters = () => {
           );
         })}
       </div>
-      <p>1-100 / </p>
-      <Link to={`/characters`}>
-        <p>101-200</p>
-      </Link>
+      <Pagination
+        page={page}
+        setPage={setPage}
+        skip={skip}
+        setSkip={setSkip}
+        count={count}
+        results={results}
+      />
     </div>
   );
 };
