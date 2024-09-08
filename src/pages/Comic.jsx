@@ -15,7 +15,7 @@ const Comic = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/comic/${id}`);
+        const response = await axios.get(`${baseCommandUrl}/comic/${id}`);
         // console.log(response.data);
         setData(response.data);
         setLoading(false);

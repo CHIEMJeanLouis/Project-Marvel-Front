@@ -21,7 +21,7 @@ const Comics = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${baseUrl}/comics?title=${search}&skip=${skip}`
+          `${baseCommandUrl}/comics?title=${search}&skip=${skip}`
         );
         setData(response.data);
         setCount(response.data.count);

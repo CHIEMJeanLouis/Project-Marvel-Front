@@ -27,7 +27,7 @@ const Characters = ({ fav, setFav }) => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `${baseUrl}/characters?name=${search}&skip=${skip}`
+        `${baseCommandUrl}/characters?name=${search}&skip=${skip}`
       );
       setData(response.data);
       setCount(response.data.count);

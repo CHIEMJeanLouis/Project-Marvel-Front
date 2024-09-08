@@ -5,6 +5,7 @@ import Loader from "../assets/images/Loader.gif";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { BsFillHeartbreakFill } from "react-icons/bs";
+import { baseCommandUrl } from "../utils/endPoints";
 
 const Favoris = ({ fav, setFav }) => {
   const [data, setData] = useState([]);
@@ -14,7 +15,9 @@ const Favoris = ({ fav, setFav }) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/characters?name=&skip=&`);
+      const response = await axios.get(
+        `${baseCommandUrl}/characters?name=&skip=&`
+      );
       setData(response.data);
       setIsLoading(false);
     } catch (error) {
