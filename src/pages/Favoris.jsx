@@ -36,6 +36,14 @@ const Favoris = ({ fav, setFav }) => {
     </div>
   ) : savedFav ? (
     <div>
+      <button
+        onClick={() => {
+          Cookies.remove("favorite-char");
+          setFav([]);
+        }}
+      >
+        Effacez tous les favoris
+      </button>
       {data.results.map((item) => {
         return (
           <div key={item._id}>
@@ -61,7 +69,6 @@ const Favoris = ({ fav, setFav }) => {
                 >
                   <BsFillHeartbreakFill />
                 </div>
-
                 <Link to={`/character/${item._id}`}>
                   <div className="char-card">
                     <div className="char-card-pic">
