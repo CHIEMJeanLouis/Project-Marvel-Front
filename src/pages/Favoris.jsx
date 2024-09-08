@@ -34,7 +34,7 @@ const Favoris = ({ fav, setFav }) => {
     <div>
       <img src={Loader} alt="loader" />
     </div>
-  ) : (
+  ) : savedFav ? (
     <div>
       {data.results.map((item) => {
         return (
@@ -82,6 +82,8 @@ const Favoris = ({ fav, setFav }) => {
         );
       })}
     </div>
+  ) : (
+    <h1>Aucun favoris pour le moment. Toute facon, la page déconne xD</h1>
   );
 };
 
