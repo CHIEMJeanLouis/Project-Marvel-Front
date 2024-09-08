@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "../utils/endPoints";
 import { baseCommandUrl } from "../utils/endPoints";
-import Loader from "../assets/images/Loader.gif";
+import Loader from "../../public/Loader.gif";
 
 const Character = () => {
   const { id } = useParams();

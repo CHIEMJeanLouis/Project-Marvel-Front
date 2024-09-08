@@ -6,7 +6,7 @@ import { baseUrl } from "../utils/endPoints";
 import { baseCommandUrl } from "../utils/endPoints";
 import Cookies from "js-cookie";
 
-import Aïe from "../assets/images/Aïe.webp";
+import Aïe from "../../public/Aïe.webp";
 
 //import de components
 

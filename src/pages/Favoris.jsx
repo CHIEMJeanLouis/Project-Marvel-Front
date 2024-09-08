@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { baseUrl } from "../utils/endPoints";
-import Loader from "../assets/images/Loader.gif";
+import Loader from "../../public/Loader.gif";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { BsFillHeartbreakFill } from "react-icons/bs";

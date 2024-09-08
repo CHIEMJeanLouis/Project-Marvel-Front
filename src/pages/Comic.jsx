@@ -4,7 +4,7 @@ import axios from "axios";
 import { baseUrl } from "../utils/endPoints";
 import { baseCommandUrl } from "../utils/endPoints";
 import { FaHeart } from "react-icons/fa";
-import Loader from "../assets/images/Loader.gif";
+import Loader from "../../public/Loader.gif";
 
 const Comic = () => {
   const { id } = useParams();

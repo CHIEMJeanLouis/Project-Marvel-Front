@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { baseUrl } from "../utils/endPoints";
 import { baseCommandUrl } from "../utils/endPoints";
-import Loader from "../assets/images/Loader.gif";
+import Loader from "../../public/Loader.gif";
 
 import Pagination from "../components/Pagination";
 import Search from "../components/Search";
