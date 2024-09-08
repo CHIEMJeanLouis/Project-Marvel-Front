@@ -7,7 +7,9 @@ import { GiThorHammer } from "react-icons/gi";
 const Welcome = () => {
   return (
     <div className="welcome">
-      <h1>Bienvenue sur le site des années 90 Marvel</h1>
+      <Link to="/characters">
+        <h1>Bienvenue sur le site des années 90 Marvel</h1>
+      </Link>
       <div>
         <h2 className="icons">
           <GiSpiderWeb /> <GiAmericanShield /> <GiIronMask />

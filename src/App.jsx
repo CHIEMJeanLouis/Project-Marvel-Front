@@ -1,8 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-//icons
-import { FaSpider } from "react-icons/fa";
+import { useState } from "react";
 
 //component
 import Header from "./components/Header";
@@ -17,17 +15,25 @@ import Comic from "./pages/Comic";
 import Footer from "./components/Footer";
 
 function App() {
+  const [fav, setFav] = useState([]);
+
   return (
     <>
       <Router>
         <Header />
         <Routes>
           <Route path="/" element={<Welcome />} />
-          <Route path="/characters" element={<Characters />} />
+          <Route
+            path="/characters"
+            element={<Characters fav={fav} setFav={setFav} />}
+          />
           <Route path="/character/:id" element={<Character />} />
           <Route path="/comics" element={<Comics />} />
           <Route path="/comic/:id" element={<Comic />} />
-          <Route path="/favoris" element={<Favoris />} />
+          <Route
+            path="/favoris"
+            element={<Favoris fav={fav} setFav={setFav} />}
+          />
         </Routes>
         <Footer />
       </Router>

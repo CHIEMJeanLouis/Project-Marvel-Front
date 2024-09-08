@@ -132,6 +132,11 @@ input {
   align-items: center;
   font-size: 18px;
   color: lightblue;
+}
+.heart {
+  position: relative;
+  top: 30px;
+  left: 75px;
   cursor: pointer;
 }
 

@@ -13,7 +13,7 @@ import Aïe from "../assets/images/Aïe.webp";
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
 
-const Characters = () => {
+const Characters = ({ fav, setFav }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -21,7 +21,8 @@ const Characters = () => {
   const [skip, setSkip] = useState(0);
   const [count, setCount] = useState();
   const [results, setResults] = useState();
-  const [fav, setFav] = useState([]);
+
+  const [click, setClick] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -40,10 +41,6 @@ const Characters = () => {
   useEffect(() => {
     fetchData();
   }, [search, page]);
-
-  // useEffect(() => {
-  //   setPage(1);
-  // }, [search]);
 
   return isLoading ? (
     <div className="loader">
@@ -72,40 +69,41 @@ const Characters = () => {
 
       <div className="character-content">
         {data.results.map((item) => {
-          //console.log(item);
-
-          // const favoris = item._id;
-
-          // Cookies.set(fav, favoris, { expires: 7 });
-
-          const handleFavorites = (item) => {
-            console.log(item);
-            // const addFavorite =
+          const handleFavorites = (id) => {
+            const copyFav = [...fav];
+            copyFav.push(id);
+            setFav(copyFav);
+            fav.map((id) => {
+              return Cookies.set("favorite-char", fav);
+            });
           };
 
           return (
             <div className="favorite" key={item._id}>
               <div
+                className="heart"
                 onClick={() => {
-                  handleFavorites();
+                  handleFavorites(item._id);
+                  setClick(true);
                 }}
               >
                 <FaHeart />
               </div>
-              <Link to={`/character/${item._id}`}>
-                <div className="char-card">
-                  <div className="char-card-pic">
-                    <img
-                      src={item.thumbnail.path + "/portrait_medium.jpg"}
-                      alt="pic of character"
-                    />
-                  </div>
+
+              <div className="char-card">
+                <div className="char-card-pic">
+                  <img
+                    src={item.thumbnail.path + "/portrait_medium.jpg"}
+                    alt="pic of character"
+                  />
+                </div>
+                <Link to={`/character/${item._id}`}>
                   <div className="char-card-name">
                     <p>{item.name}</p>
                   </div>
-                  <div className="char-card-detail">{item.description}</div>
-                </div>
-              </Link>
+                </Link>
+                <div className="char-card-detail">{item.description}</div>
+              </div>
             </div>
           );
         })}
