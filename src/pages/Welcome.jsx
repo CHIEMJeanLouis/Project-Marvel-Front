@@ -8,7 +8,7 @@ const Welcome = () => {
   return (
     <div className="welcome">
       <Link to="/characters">
-        <h1>Bienvenue sur le site des années 90 Marvel</h1>
+        <h1>Bienvenue sur le site des années 1990 Marvel</h1>
       </Link>
       <div>
         <h2 className="icons">
